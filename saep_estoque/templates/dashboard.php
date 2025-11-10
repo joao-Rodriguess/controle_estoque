@@ -1,17 +1,28 @@
 <?php
+// Garantir que session está iniciada
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+require_once __DIR__ . '/../db.php';
+
 $title = 'Dashboard - SAEP Estoque';
 $base_url = '/saep_estoque';
 $usuario_logado = isset($_SESSION['usuario_id']);
 
 if (!$usuario_logado) {
-    header('Location: app.php?action=login');
+    header('Location: ' . $base_url . '/app.php?action=login');
     exit;
 }
 
-// Obter estatísticas
+// Inicializar banco de dados
+init_database($pdo);
+
+// Obter dados
 $stats = obter_estatisticas($pdo);
 $movimentacoes_recentes = listar_movimentacoes($pdo, 5);
 $produtos = listar_produtos($pdo);
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -32,12 +43,12 @@ $produtos = listar_produtos($pdo);
             </div>
 
             <nav>
-                <a href="../app.php?action=dashboard" class="active">Dashboard</a>
-                <a href="produtos.php">Produtos</a>
-                <a href="movimentacoes.php">Movimentações</a>
-                <a href="../app.php?action=historico">Histórico</a>
-                <a href="../app.php?action=perfil">Perfil</a>
-                <a href="../app.php?action=logout">Sair</a>
+                <a href="/saep_estoque/app.php?action=dashboard" class="active">Dashboard</a>
+                <a href="/saep_estoque/app.php?action=produtos">Produtos</a>
+                <a href="/saep_estoque/app.php?action=movimentacoes">Movimentações</a>
+                <a href="/saep_estoque/app.php?action=historico">Histórico</a>
+                <a href="/saep_estoque/app.php?action=perfil">Perfil</a>
+                <a href="/saep_estoque/app.php?action=logout">Sair</a>
             </nav>
         </div>
     </header>
@@ -93,9 +104,9 @@ $produtos = listar_produtos($pdo);
         <div class="card">
             <div class="card-header">Ações Rápidas</div>
             <div class="flex" style="gap: 1rem;">
-                <a href="app.php?action=produtos" class="btn btn-primary">➕ Novo Produto</a>
-                <a href="app.php?action=movimentacoes" class="btn btn-success">📦 Registrar Movimentação</a>
-                <a href="app.php?action=historico" class="btn btn-secondary">📋 Ver Histórico</a>
+                <a href="/saep_estoque/app.php?action=produtos" class="btn btn-primary">➕ Novo Produto</a>
+                <a href="/saep_estoque/app.php?action=movimentacoes" class="btn btn-success">📦 Registrar Movimentação</a>
+                <a href="/saep_estoque/app.php?action=historico" class="btn btn-secondary">📋 Ver Histórico</a>
             </div>
         </div>
 
@@ -124,7 +135,7 @@ $produtos = listar_produtos($pdo);
                             <span class="badge badge-danger"><?php echo $prod['quantidade']; ?> unidades</span>
                         </td>
                         <td>
-                            <a href="app.php?action=movimentacoes" class="btn btn-small btn-warning">Repor</a>
+                            <a href="/saep_estoque/app.php?action=movimentacoes" class="btn btn-small btn-warning">Repor</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -167,7 +178,7 @@ $produtos = listar_produtos($pdo);
                 </tbody>
             </table>
             <div style="margin-top: 1rem;">
-                <a href="app.php?action=historico" class="btn btn-secondary">Ver Todas as Movimentações</a>
+                <a href="/saep_estoque/app.php?action=historico" class="btn btn-secondary">Ver Todas as Movimentações</a>
             </div>
         </div>
         <?php else: ?>

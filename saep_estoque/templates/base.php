@@ -14,7 +14,7 @@ unset($_SESSION['erro']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title ?? 'SAEP - Estoque'); ?></title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="/saep_estoque/static/css/style.css">
 </head>
 <body>
     <header>

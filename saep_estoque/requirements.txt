@@ -1,0 +1,38 @@
+# SAEP - Sistema de Controle de Estoque
+# Requisitos de Sistema
+
+## PHP
+- PHP >= 7.4 (recomendado 8.0+)
+
+## Extensões PHP Obrigatórias
+- PDO (PHP Data Objects)
+- pdo_sqlite (para SQLite) OU pdo_mysql (para MySQL)
+- Session support (padrão)
+
+## Browser Recomendado
+- Chrome/Edge 90+
+- Firefox 88+
+- Safari 14+
+
+## Servidor Web
+- Apache 2.4+ com mod_rewrite
+- Nginx 1.20+
+- IIS 10+
+
+## Instalação das Extensões (Windows XAMPP)
+1. Edite C:\xampp\php\php.ini
+2. Remova o ponto-e-vírgula (;) das linhas:
+   - extension=pdo_sqlite
+   - extension=json
+3. Reinicie o Apache
+
+## Permissões de Arquivo
+- Pasta do projeto: 755
+- Arquivo de banco de dados: 664 (será criado automaticamente)
+- Pasta de upload (se aplicável): 777
+
+## Uso
+Simplesmente acesse http://localhost/saep_estoque/app.php?action=login
+
+Nenhuma instalação adicional ou composer é necessário!
+

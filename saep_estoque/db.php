@@ -1,17 +1,64 @@
 <?php
 // db.php - Conexão ao banco de dados e funções auxiliares
+// Configurado para MySQL (substitua por SQLite se necessário)
 
-$sqliteFile = __DIR__ . '/saep_db.sqlite';
+// ============ CONFIGURAÇÃO ============
+// Descomente uma das linhas abaixo para escolher o banco de dados
 
+// OPÇÃO 1: MySQL (recomendado)
+$db_config = [
+    'type' => 'mysql',
+    'host' => '127.0.0.1',
+    'port' => 3306,
+    'user' => 'root',
+    'password' => '',
+    'database' => 'controle_estoque'
+];
+
+// OPÇÃO 2: SQLite (comentado)
+// $db_config = [
+//     'type' => 'sqlite',
+//     'file' => __DIR__ . '/saep_db.sqlite'
+// ];
+
+// ============ CONEXÃO ============
 try {
-    $pdo = new PDO('sqlite:' . $sqliteFile);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    if ($db_config['type'] === 'mysql') {
+        $dsn = "mysql:host={$db_config['host']};port={$db_config['port']};dbname={$db_config['database']};charset=utf8mb4";
+        $pdo = new PDO(
+            $dsn,
+            $db_config['user'],
+            $db_config['password'],
+            [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+            ]
+        );
+    } else {
+        // SQLite
+        $pdo = new PDO(
+            'sqlite:' . $db_config['file'],
+            null,
+            null,
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
+    }
 } catch (PDOException $e) {
     die('Erro na conexão com banco de dados: ' . $e->getMessage());
 }
 
-// Inicializar banco de dados se necessário
+// Inicializar banco de dados se necessário (apenas para SQLite)
 function init_database(PDO $pdo) {
+    // Para MySQL, o banco e tabelas já devem estar criados
+    // Esta função é mantida para compatibilidade com SQLite
+    
+    // Verificar se estamos usando SQLite
+    $driver = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
+    if ($driver !== 'sqlite') {
+        return true; // MySQL já configurado
+    }
+    
+    // Para SQLite, criar tabelas se necessário
     $sqlFile = __DIR__ . '/saep_db.sql';
     if (!file_exists($sqlFile)) {
         return false;

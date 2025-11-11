@@ -35,7 +35,7 @@ $title = 'Login - SAEP Estoque';
             </div>
             <?php endif; ?>
 
-            <form method="POST" action="app.php?action=login">
+            <form method="POST" action="../app.php?action=login">
                 <div class="form-group">
                     <label for="username">Usuário</label>
                     <input type="text" id="username" name="username" required autofocus>

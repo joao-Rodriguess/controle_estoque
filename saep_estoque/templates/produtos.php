@@ -4,7 +4,7 @@ $base_url = '/saep_estoque';
 $usuario_logado = isset($_SESSION['usuario_id']);
 
 if (!$usuario_logado) {
-    header('Location: app.php?action=login');
+    header('Location: login.php');
     exit;
 }
 

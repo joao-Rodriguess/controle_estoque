@@ -18,13 +18,13 @@ $public_pages = ['login', 'cadastro'];
 $usuario_logado = isset($_SESSION['usuario_id']);
 
 if (!$usuario_logado && !in_array($action, $public_pages)) {
-    header('Location: app.php?action=login');
+    header('Location: templates/login.php');
     exit;
 }
 
 // Se já está logado e tenta acessar login, redirecionar para dashboard
 if ($usuario_logado && in_array($action, $public_pages)) {
-    header('Location: app.php?action=dashboard');
+    header('Location: templates/dashboard.php');
     exit;
 }
 
@@ -40,7 +40,7 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $resultado['usuario']['username'];
             $_SESSION['nome'] = $resultado['usuario']['nome'];
             $_SESSION['mensagem_sucesso'] = 'Login realizado com sucesso!';
-            header('Location: app.php?action=dashboard');
+            header('Location: templates/dashboard.php');
             exit;
         } else {
             $_SESSION['erro'] = $resultado['erro'];

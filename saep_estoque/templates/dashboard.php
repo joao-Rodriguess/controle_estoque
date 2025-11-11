@@ -11,7 +11,7 @@ $base_url = '/saep_estoque';
 $usuario_logado = isset($_SESSION['usuario_id']);
 
 if (!$usuario_logado) {
-    header('Location: ' . $base_url . '/app.php?action=login');
+    header('Location: ' . $base_url . 'login.php');
     exit;
 }
 
@@ -44,11 +44,11 @@ $produtos = listar_produtos($pdo);
 
             <nav>
                 <a href="../../saep_estoque/app.php?action=dashboard" class="active">Dashboard</a>
-                <a href="../../saep_estoque/app.php?action=produtos">Produtos</a>
-                <a href="../../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
-                <a href="../../saep_estoque/app.php?action=historico">Histórico</a>
-                <a href="../../saep_estoque/app.php?action=perfil">Perfil</a>
-                <a href="../../saep_estoque/app.php?action=logout">Sair</a>
+                <a href="produtos.php">Produtos</a>
+                <a href="movimentacoes.php">Movimentações</a>
+                <a href="historico.php">Histórico</a>
+                <a href="perfil.php">Perfil</a>
+                <a href="logout.php">Sair</a>
             </nav>
         </div>
     </header>

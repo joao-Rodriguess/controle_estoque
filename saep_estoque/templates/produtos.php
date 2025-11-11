@@ -18,7 +18,7 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="../../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/style.css">
 </head>
 <body>
     <header>
@@ -31,12 +31,12 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
             </div>
 
             <nav>
-                <a href="/saep_estoque/app.php?action=dashboard">Dashboard</a>
-                <a href="/saep_estoque/app.php?action=produtos" class="active">Produtos</a>
-                <a href="/saep_estoque/app.php?action=movimentacoes">Movimentações</a>
-                <a href="/saep_estoque/app.php?action=historico">Histórico</a>
-                <a href="/saep_estoque/app.php?action=perfil">Perfil</a>
-                <a href="/saep_estoque/app.php?action=logout">Sair</a>
+                <a href="templates/dashboard.php">Dashboard</a>
+                <a href="templates/produtos.php" class="active">Produtos</a>
+                <a href="templates/movimentacoes.php">Movimentações</a>
+                <a href="templates/historico.php">Histórico</a>
+                <a href="templates/perfil.php">Perfil</a>
+                <a href="templates/logout.php">Sair</a>
             </nav>
         </div>
     </header>

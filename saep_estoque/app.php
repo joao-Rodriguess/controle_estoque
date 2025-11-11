@@ -116,7 +116,7 @@ if ($action === 'produtos' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['mensagem_sucesso'] = $resultado['mensagem'] ?? $resultado['erro'];
         }
     }
-    header('Location: app.php?action=produtos');
+    header('Location: templates/produtos.php');
     exit;
 }
 

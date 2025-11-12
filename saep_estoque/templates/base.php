@@ -14,7 +14,7 @@ unset($_SESSION['erro']);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title ?? 'SAEP - Estoque'); ?></title>
-    <link rel="stylesheet" href="/saep_estoque/static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <header>
@@ -35,7 +35,6 @@ unset($_SESSION['erro']);
                 <a href="/saep_estoque/app.php?action=movimentacoes" class="<?php echo ($_GET['action'] ?? '') === 'movimentacoes' ? 'active' : ''; ?>">Movimentações</a>
                 <a href="/saep_estoque/app.php?action=historico" class="<?php echo ($_GET['action'] ?? '') === 'historico' ? 'active' : ''; ?>">Histórico</a>
                 <a href="/saep_estoque/app.php?action=perfil" class="<?php echo ($_GET['action'] ?? '') === 'perfil' ? 'active' : ''; ?>">Perfil</a>
-                <a href="/saep_estoque/app.php?action=logout">Sair</a>
             </nav>
             <?php endif; ?>
         </div>

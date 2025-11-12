@@ -17,7 +17,7 @@ $movimentacoes = listar_movimentacoes($pdo, 50);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="<?php echo htmlspecialchars($base_url); ?>/static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <header>
@@ -30,12 +30,11 @@ $movimentacoes = listar_movimentacoes($pdo, 50);
             </div>
 
             <nav>
-                <a href="/saep_estoque/app.php?action=dashboard">Dashboard</a>
-                <a href="/saep_estoque/app.php?action=produtos">Produtos</a>
-                <a href="/saep_estoque/app.php?action=movimentacoes" class="active">Movimentações</a>
-                <a href="/saep_estoque/app.php?action=historico">Histórico</a>
-                <a href="/saep_estoque/app.php?action=perfil">Perfil</a>
-                <a href="/saep_estoque/app.php?action=logout">Sair</a>
+                <a href="../saep_estoque/app.php?action=dashboard">Dashboard</a>
+                <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
+                <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
+                <a href="../saep_estoque/app.php?action=historico">Histórico</a>
+                <a href="../saep_estoque/app.php?action=perfil">Perfil</a>
             </nav>
         </div>
     </header>

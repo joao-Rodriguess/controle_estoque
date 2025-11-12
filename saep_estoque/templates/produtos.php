@@ -18,7 +18,7 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <header>
@@ -31,12 +31,11 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
             </div>
 
             <nav>
-                <a href="templates/dashboard.php">Dashboard</a>
-                <a href="templates/produtos.php" class="active">Produtos</a>
-                <a href="templates/movimentacoes.php">Movimentações</a>
-                <a href="templates/historico.php">Histórico</a>
-                <a href="templates/perfil.php">Perfil</a>
-                <a href="templates/logout.php">Sair</a>
+                <a href="../saep_estoque/app.php?action=dashboard">Dashboard</a>
+                <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
+                <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
+                <a href="../saep_estoque/app.php?action=historico">Histórico</a>
+                <a href="../saep_estoque/app.php?action=perfil">Perfil</a>                
             </nav>
         </div>
     </header>
@@ -133,7 +132,7 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
                                 </td>
                                 <td>R$ <?php echo number_format($prod['preco'], 2, ',', '.'); ?></td>
                                 <td>
-                                    <a href="app.php?action=produtos&editar=<?php echo $prod['id']; ?>" class="btn btn-small btn-primary">Editar</a>
+                                    <a href="app.php?action=produtos&editar=<?php echo $prod['id']; ?>" class="btn btn-small btn-danger">Editar</a>
                                     <form method="POST" action="app.php?action=produtos" style="display: inline;">
                                         <input type="hidden" name="subaction" value="deletar">
                                         <input type="hidden" name="id" value="<?php echo $prod['id']; ?>">

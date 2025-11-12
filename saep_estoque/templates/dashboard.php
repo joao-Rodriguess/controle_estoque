@@ -30,7 +30,7 @@ $produtos = listar_produtos($pdo);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <header>
@@ -43,12 +43,11 @@ $produtos = listar_produtos($pdo);
             </div>
 
             <nav>
-                <a href="../../saep_estoque/app.php?action=dashboard" class="active">Dashboard</a>
-                <a href="../../saep_estoque/app.php?action=produtos">Produtos</a>
-                <a href="../../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
-                <a href="../../saep_estoque/app.php?action=historico">Histórico</a>
-                <a href="../../saep_estoque/app.php?action=perfil">Perfil</a>
-                <a href="../../saep_estoque/app.php?action=logout">Sair</a>
+                <a href="../saep_estoque/app.php?action=dashboard">Dashboard</a>
+                <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
+                <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
+                <a href="../saep_estoque/app.php?action=historico">Histórico</a>
+                <a href="../saep_estoque/app.php?action=perfil">Perfil</a>
             </nav>
         </div>
     </header>
@@ -100,15 +99,7 @@ $produtos = listar_produtos($pdo);
             </div>
         </div>
 
-        <!-- Seção de Ações Rápidas -->
-        <div class="card">
-            <div class="card-header">Ações Rápidas</div>
-            <div class="flex" style="gap: 1rem;">
-                <a href="/saep_estoque/app.php?action=produtos" class="btn btn-primary">➕ Novo Produto</a>
-                <a href="/saep_estoque/app.php?action=movimentacoes" class="btn btn-success">📦 Registrar Movimentação</a>
-                <a href="/saep_estoque/app.php?action=historico" class="btn btn-secondary">📋 Ver Histórico</a>
-            </div>
-        </div>
+       
 
         <!-- Produtos com Baixa Quantidade -->
         <?php
@@ -135,7 +126,7 @@ $produtos = listar_produtos($pdo);
                             <span class="badge badge-danger"><?php echo $prod['quantidade']; ?> unidades</span>
                         </td>
                         <td>
-                            <a href="/saep_estoque/app.php?action=movimentacoes" class="btn btn-small btn-warning">Repor</a>
+                            <a href="../saep_estoque/app.php?action=movimentacoes" class="btn btn-small btn-warning">Repor</a>
                         </td>
                     </tr>
                     <?php endforeach; ?>
@@ -177,9 +168,6 @@ $produtos = listar_produtos($pdo);
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <div style="margin-top: 1rem;">
-                <a href="/saep_estoque/app.php?action=historico" class="btn btn-secondary">Ver Todas as Movimentações</a>
-            </div>
         </div>
         <?php else: ?>
         <div class="card">

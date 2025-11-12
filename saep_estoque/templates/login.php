@@ -8,7 +8,7 @@ $title = 'Login - SAEP Estoque';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
-    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
     <div class="login-container">
@@ -35,7 +35,7 @@ $title = 'Login - SAEP Estoque';
             </div>
             <?php endif; ?>
 
-            <form method="POST" action="../app.php?action=login">
+            <form method="POST" action="app.php?action=login">
                 <div class="form-group">
                     <label for="username">Usuário</label>
                     <input type="text" id="username" name="username" required autofocus>

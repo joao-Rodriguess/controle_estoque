@@ -18,13 +18,13 @@ $public_pages = ['login', 'cadastro'];
 $usuario_logado = isset($_SESSION['usuario_id']);
 
 if (!$usuario_logado && !in_array($action, $public_pages)) {
-    header('Location: templates/login.php');
+    header('Location: app.php?action=login');
     exit;
 }
 
 // Se já está logado e tenta acessar login, redirecionar para dashboard
 if ($usuario_logado && in_array($action, $public_pages)) {
-    header('Location: templates/dashboard.php');
+    header('Location: app.php?action=dashboard');
     exit;
 }
 
@@ -40,7 +40,7 @@ if ($action === 'login' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $resultado['usuario']['username'];
             $_SESSION['nome'] = $resultado['usuario']['nome'];
             $_SESSION['mensagem_sucesso'] = 'Login realizado com sucesso!';
-            header('Location: templates/dashboard.php');
+            header('Location: app.php?action=dashboard');
             exit;
         } else {
             $_SESSION['erro'] = $resultado['erro'];
@@ -116,7 +116,7 @@ if ($action === 'produtos' && $_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['mensagem_sucesso'] = $resultado['mensagem'] ?? $resultado['erro'];
         }
     }
-    header('Location: templates/produtos.php');
+    header('Location: app.php?action=produtos');
     exit;
 }
 
@@ -135,6 +135,28 @@ if ($action === 'movimentacoes' && $_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     header('Location: app.php?action=movimentacoes');
     exit;
+}
+
+if ($action === 'historico') {
+    $filtro_data = $_GET['filtro_data'] ?? null;
+
+    // obter todas as movimentações (limite atual mantido)
+    $movimentacoes = listar_movimentacoes($pdo, 500);
+
+    if ($filtro_data) {
+        // valida formato
+        $d = DateTime::createFromFormat('Y-m-d', $filtro_data);
+        if ($d && $d->format('Y-m-d') === $filtro_data) {
+            $movimentacoes = array_values(array_filter($movimentacoes, function($m) use ($filtro_data) {
+                // assume campo 'data' está em formato compatível com strtotime
+                return date('Y-m-d', strtotime($m['data'])) === $filtro_data;
+            }));
+            // opcional: informar usuário
+            $_SESSION['mensagem_sucesso'] = 'Filtrando por: ' . $filtro_data;
+        } else {
+            $_SESSION['erro'] = 'Data inválida para filtro';
+        }
+    }
 }
 
 // Carregar template

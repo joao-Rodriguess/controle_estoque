@@ -9,6 +9,13 @@ $base_url = '/saep_estoque';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="static/css/style.css">
+    <style>
+
+        .login-container {
+            background: url('static/images/isso.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <div class="login-container">

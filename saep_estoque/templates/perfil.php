@@ -66,7 +66,7 @@ if (!$usuario_logado) {
         <div class="grid grid-2">
             <!-- Informações do Usuário -->
             <div class="card">
-                <div class="card-header">👤 Meu Perfil</div>
+                <div class="card-header" style="color: #333;">👤 Meu Perfil</div>
 
                 <div style="padding: 1rem; background: #f9f9f9; border-radius: 4px; margin-bottom: 1.5rem;">
                     <p style="margin: 0.5rem 0;">
@@ -97,7 +97,7 @@ if (!$usuario_logado) {
 
             <!-- Ações e Informações -->
             <div class="card">
-                <div class="card-header">⚙️ Ações</div>
+                <div class="card-header" style="color: #333;">⚙️ Ações</div>
 
                 <div style="display: flex; flex-direction: column; gap: 1rem;">
                     <div>

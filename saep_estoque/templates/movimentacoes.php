@@ -69,7 +69,7 @@ $movimentacoes = listar_movimentacoes($pdo, 50);
         <div class="grid grid-2">
             <!-- Formulário -->
             <div class="card">
-                <div class="card-header">➕ Registrar Movimentação</div>
+                <div class="card-header" style="color: #333;">➕ Registrar Movimentação</div>
 
                 <?php if (empty($produtos)): ?>
                 <div class="alert alert-warning">
@@ -115,7 +115,7 @@ $movimentacoes = listar_movimentacoes($pdo, 50);
 
             <!-- Histórico Recente -->
             <div class="card">
-                <div class="card-header">📊 Últimas Movimentações</div>
+                <div class="card-header" style="color: #333;">📊 Últimas Movimentações</div>
 
                 <?php if (!empty($movimentacoes)): ?>
                 <div class="overflow-auto">

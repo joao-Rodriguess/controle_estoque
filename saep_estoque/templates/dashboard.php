@@ -114,7 +114,7 @@ $produtos = listar_produtos($pdo);
         if (!empty($produtos_baixos)):
         ?>
         <div class="card">
-            <div class="card-header">⚠️ Produtos com Estoque Baixo</div>
+            <div class="card-header" style="color: #333;">⚠️ Produtos com Estoque Baixo</div>
             <table>
                 <thead>
                     <tr>
@@ -145,7 +145,7 @@ $produtos = listar_produtos($pdo);
         <!-- Últimas Movimentações -->
         <?php if (!empty($movimentacoes_recentes)): ?>
         <div class="card">
-            <div class="card-header">📊 Últimas Movimentações</div>
+            <div class="card-header" style="color: #333;">📊 Últimas Movimentações</div>
             <table>
                 <thead>
                     <tr>

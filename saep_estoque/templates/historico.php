@@ -99,7 +99,7 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
         <?php endif; ?>
 
         <div class="card">
-            <div class="card-header">📜 Histórico Completo de Movimentações</div>
+            <div class="card-header" style="color: #333;">📜 Histórico Completo de Movimentações</div>
 
             <!-- ÁREA DE FILTROS ATUALIZADA -->
             <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">

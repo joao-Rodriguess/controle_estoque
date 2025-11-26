@@ -70,7 +70,7 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
         <div class="grid grid-2">
             <!-- Formulário -->
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="color: #333;">
                     <?php echo $produto_editar ? '✏️ Editar Produto' : '➕ Novo Produto'; ?>
                 </div>
 
@@ -113,7 +113,7 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
 
             <!-- Lista de Produtos -->
             <div class="card">
-                <div class="card-header">📋 Lista de Produtos (<?php echo count($produtos); ?>)</div>
+                <div class="card-header" style="color: #333;">📋 Lista de Produtos (<?php echo count($produtos); ?>)</div>
 
                 <?php if (!empty($produtos)): ?>
                 <div class="overflow-auto">

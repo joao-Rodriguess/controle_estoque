@@ -84,7 +84,7 @@ if (!$usuario_logado) {
             <div class="grid grid-2">
                 
                 <div class="card">
-                    <div class="card-header">📦 Gerenciando Produtos</div>
+                    <div class="card-header" style="color: #333;">📦 Gerenciando Produtos</div>
                     <div style="padding: 1rem;">
                         <p><strong>Para cadastrar ou editar itens:</strong></p>
                         <ul class="step-list">
@@ -98,7 +98,7 @@ if (!$usuario_logado) {
                 </div>
 
                 <div class="card">
-                    <div class="card-header">🔄 Entradas e Saídas</div>
+                    <div class="card-header" style="color: #333;">🔄 Entradas e Saídas</div>
                     <div style="padding: 1rem;">
                         <p><strong>Para registrar movimentação:</strong></p>
                         <ul class="step-list">
@@ -112,7 +112,7 @@ if (!$usuario_logado) {
                 </div>
 
                 <div class="card">
-                    <div class="card-header">📜 Histórico e Auditoria</div>
+                    <div class="card-header" style="color: #333;">📜 Histórico e Auditoria</div>
                     <div style="padding: 1rem;">
                         <p><strong>Para consultar registros:</strong></p>
                         <ul class="step-list">
@@ -127,7 +127,7 @@ if (!$usuario_logado) {
                 </div>
 
                 <div class="card">
-                    <div class="card-header">📊 Dashboard</div>
+                    <div class="card-header" style="color: #333;">📊 Dashboard</div>
                     <div style="padding: 1rem;">
                         <p><strong>Visão Geral do Sistema:</strong></p>
                         <ul class="step-list">
@@ -140,7 +140,7 @@ if (!$usuario_logado) {
                 </div>
 
                 <div class="card">
-                    <div class="card-header">👤 Perfil e Segurança</div>
+                    <div class="card-header" style="color: #333;">👤 Perfil e Segurança</div>
                     <div style="padding: 1rem;">
                         <p><strong>Gerenciando sua conta:</strong></p>
                         <ul class="step-list">
@@ -153,7 +153,7 @@ if (!$usuario_logado) {
                 </div>
 
                 <div class="card">
-                    <div class="card-header">⚡ Dicas de Produtividade</div>
+                    <div class="card-header" style="color: #333;">⚡ Dicas de Produtividade</div>
                     <div style="padding: 1rem;">
                         <p><strong>Melhores práticas:</strong></p>
                         <ul class="step-list">

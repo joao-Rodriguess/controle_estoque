@@ -15,6 +15,12 @@ if (!$usuario_logado) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="static/css/style.css">
+    <style>
+        body {
+            background: url('static/images/mais.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body>
     <header>

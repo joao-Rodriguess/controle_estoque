@@ -9,8 +9,15 @@ $title = 'Login - SAEP Estoque';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="static/css/style.css">
+    <style>
+
+        .login-page {
+            background: url('static/images/isso.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+    </style>
 </head>
-<body>
+<body class="login-page">
     <div class="login-container">
     <div class="login-box">
         <div style="text-align: center; height: auto;">

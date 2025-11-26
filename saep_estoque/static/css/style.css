@@ -36,7 +36,10 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
+    
 }
+
+
 
 /* ============================================
    HEADER E NAVEGAÇÃO
@@ -123,7 +126,7 @@ main {
 .card-header {
     font-size: 1.3rem;
     font-weight: 600;
-    color: var(--primary);
+    color: white;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
     border-bottom: 2px solid var(--light);
@@ -454,7 +457,6 @@ button, .btn, a.btn {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
     padding: 2rem;
 }
 
@@ -462,9 +464,10 @@ button, .btn, a.btn {
     background: white;
     padding: 2.5rem;
     border-radius: 8px;
-    box-shadow: var(--shadow-lg);
     width: 100%;
     max-width: 400px;
+    /* Sombra personalizada MUITO ESCURO*/
+    box-shadow: 0 160px 160px rgb(0, 0, 0);
 }
 
 .login-box h2 {

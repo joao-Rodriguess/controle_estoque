@@ -16,6 +16,11 @@ if (!$usuario_logado) {
     <title><?php echo htmlspecialchars($title); ?></title>
     <link rel="stylesheet" href="static/css/style.css">
     <style>
+        body {
+            background: url('static/images/mais.gif') no-repeat center center fixed;
+            background-size: cover;
+        }
+
         /* Estilos específicos para a página de Ajuda */
         .doc-section { margin-bottom: 3rem; }
         .doc-title { border-bottom: 2px solid #eee; padding-bottom: 0.5rem; margin-bottom: 1.5rem; color: #333; }
@@ -68,13 +73,13 @@ if (!$usuario_logado) {
 
     <main class="container">
         
-        <div style="text-align: center; margin-bottom: 2rem;">
+        <div style="text-align: center; margin-bottom: 2rem; color: white;">
             <h2>📘 Central de Ajuda e Documentação</h2>
-            <p style="color: #666;">Aprenda como utilizar todas as ferramentas do sistema SAEP Estoque.</p>
+            <p style="color: white;">Aprenda como utilizar todas as ferramentas do sistema SAEP Estoque.</p>
         </div>
 
-        <section class="doc-section">
-            <h3 class="doc-title">📖 Manual do Usuário</h3>
+        <section class="doc-section" >
+            <h3 class="doc-title" style="color:white ;">📖 Manual do Usuário</h3>
             
             <div class="grid grid-2">
                 

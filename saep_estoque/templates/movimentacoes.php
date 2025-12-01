@@ -38,7 +38,7 @@ $movimentacoes = listar_movimentacoes($pdo, 50);
             <nav>
                 <a href="../saep_estoque/app.php?action=dashboard">Dashboard</a>
                 <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
-                <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
+                <a href="../saep_estoque/app.php?action=movimentacoes" class="active">Movimentações</a>
                 <a href="../saep_estoque/app.php?action=historico">Histórico</a>
                 <a href="../saep_estoque/app.php?action=perfil">Perfil</a>
                 <a href="../saep_estoque/app.php?action=ajuda" >Ajuda</a>            

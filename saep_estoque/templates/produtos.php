@@ -38,7 +38,7 @@ $produto_editar = $editando ? obter_produto($pdo, $editando) : null;
 
             <nav>
                 <a href="../saep_estoque/app.php?action=dashboard">Dashboard</a>
-                <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
+                <a href="../saep_estoque/app.php?action=produtos" class="active">Produtos</a>
                 <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
                 <a href="../saep_estoque/app.php?action=historico">Histórico</a>
                 <a href="../saep_estoque/app.php?action=perfil">Perfil</a>

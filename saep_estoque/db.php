@@ -48,7 +48,8 @@ try {
 }
 
 // Helper: recria a conexão PDO (usado para tentar reconectar se o servidor MySQL cair)
-function recreate_pdo() {
+function recreate_pdo()
+{
     global $db_config, $pdo;
     try {
         if ($db_config['type'] === 'mysql') {
@@ -79,7 +80,8 @@ function recreate_pdo() {
 }
 
 // Helper genérico para executar uma operação de banco com retry automático se a conexão cair
-function db_call_retry(PDO $p, callable $fn) {
+function db_call_retry(PDO $p, callable $fn)
+{
     try {
         return $fn($p);
     } catch (PDOException $e) {
@@ -100,22 +102,23 @@ function db_call_retry(PDO $p, callable $fn) {
 }
 
 // Inicializar banco de dados se necessário (apenas para SQLite)
-function init_database(PDO $pdo) {
+function init_database(PDO $pdo)
+{
     // Para MySQL, o banco e tabelas já devem estar criados
     // Esta função é mantida para compatibilidade com SQLite
-    
+
     // Verificar se estamos usando SQLite
     $driver = $pdo->getAttribute(PDO::ATTR_DRIVER_NAME);
     if ($driver !== 'sqlite') {
         return true; // MySQL já configurado
     }
-    
+
     // Para SQLite, criar tabelas se necessário
     $sqlFile = __DIR__ . '/saep_db.sql';
     if (!file_exists($sqlFile)) {
         return false;
     }
-    
+
     $sql = file_get_contents($sqlFile);
     try {
         $pdo->exec($sql);
@@ -127,15 +130,17 @@ function init_database(PDO $pdo) {
 }
 
 // Funções de usuário
-function usuario_existe(PDO $pdo, $username) {
-    return db_call_retry($pdo, function($pdo) use ($username) {
+function usuario_existe(PDO $pdo, $username)
+{
+    return db_call_retry($pdo, function ($pdo) use ($username) {
         $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE username = ?");
         $stmt->execute([$username]);
         return $stmt->rowCount() > 0;
     });
 }
 
-function criar_usuario(PDO $pdo, $username, $password, $nome) {
+function criar_usuario(PDO $pdo, $username, $password, $nome)
+{
     // verificar existência com retry
     if (usuario_existe($pdo, $username)) {
         return ['sucesso' => false, 'erro' => 'Usuário já existe'];
@@ -143,7 +148,7 @@ function criar_usuario(PDO $pdo, $username, $password, $nome) {
 
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
     try {
-        return db_call_retry($pdo, function($pdo) use ($username, $password_hash, $nome) {
+        return db_call_retry($pdo, function ($pdo) use ($username, $password_hash, $nome) {
             $stmt = $pdo->prepare("INSERT INTO usuarios (username, password, nome) VALUES (?, ?, ?)");
             $stmt->execute([$username, $password_hash, $nome]);
             return ['sucesso' => true, 'mensagem' => 'Usuário criado com sucesso'];
@@ -153,7 +158,8 @@ function criar_usuario(PDO $pdo, $username, $password, $nome) {
     }
 }
 
-function verificar_login(PDO $pdo, $username, $password) {
+function verificar_login(PDO $pdo, $username, $password)
+{
     // Attempt the lookup and on a 'MySQL server has gone away' error try to reconnect once
     try {
         $stmt = $pdo->prepare("SELECT id, username, nome FROM usuarios WHERE username = ?");
@@ -211,9 +217,10 @@ function verificar_login(PDO $pdo, $username, $password) {
 }
 
 // Funções de produtos
-function listar_produtos(PDO $pdo) {
+function listar_produtos(PDO $pdo)
+{
     try {
-        return db_call_retry($pdo, function($pdo) {
+        return db_call_retry($pdo, function ($pdo) {
             $stmt = $pdo->query("SELECT * FROM produtos ORDER BY nome ASC");
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         });
@@ -222,9 +229,10 @@ function listar_produtos(PDO $pdo) {
     }
 }
 
-function obter_produto(PDO $pdo, $id) {
+function obter_produto(PDO $pdo, $id)
+{
     try {
-        return db_call_retry($pdo, function($pdo) use ($id) {
+        return db_call_retry($pdo, function ($pdo) use ($id) {
             $stmt = $pdo->prepare("SELECT * FROM produtos WHERE id = ?");
             $stmt->execute([$id]);
             return $stmt->fetch(PDO::FETCH_ASSOC);
@@ -234,9 +242,10 @@ function obter_produto(PDO $pdo, $id) {
     }
 }
 
-function criar_produto(PDO $pdo, $sku, $nome, $quantidade, $preco) {
+function criar_produto(PDO $pdo, $sku, $nome, $quantidade, $preco)
+{
     try {
-        return db_call_retry($pdo, function($pdo) use ($sku, $nome, $quantidade, $preco) {
+        return db_call_retry($pdo, function ($pdo) use ($sku, $nome, $quantidade, $preco) {
             $stmt = $pdo->prepare("INSERT INTO produtos (sku, nome, quantidade, preco) VALUES (?, ?, ?, ?)");
             $stmt->execute([$sku, $nome, $quantidade, $preco]);
             return ['sucesso' => true, 'id' => $pdo->lastInsertId(), 'mensagem' => 'Produto criado'];
@@ -246,9 +255,10 @@ function criar_produto(PDO $pdo, $sku, $nome, $quantidade, $preco) {
     }
 }
 
-function atualizar_produto(PDO $pdo, $id, $sku, $nome, $preco) {
+function atualizar_produto(PDO $pdo, $id, $sku, $nome, $preco)
+{
     try {
-        return db_call_retry($pdo, function($pdo) use ($id, $sku, $nome, $preco) {
+        return db_call_retry($pdo, function ($pdo) use ($id, $sku, $nome, $preco) {
             $stmt = $pdo->prepare("UPDATE produtos SET sku = ?, nome = ?, preco = ? WHERE id = ?");
             $stmt->execute([$sku, $nome, $preco, $id]);
             return ['sucesso' => true, 'mensagem' => 'Produto atualizado'];
@@ -258,9 +268,10 @@ function atualizar_produto(PDO $pdo, $id, $sku, $nome, $preco) {
     }
 }
 
-function deletar_produto(PDO $pdo, $id) {
+function deletar_produto(PDO $pdo, $id)
+{
     try {
-        return db_call_retry($pdo, function($pdo) use ($id) {
+        return db_call_retry($pdo, function ($pdo) use ($id) {
             $pdo->beginTransaction();
             $pdo->prepare("DELETE FROM movimentacoes WHERE produto_id = ?")->execute([$id]);
             $pdo->prepare("DELETE FROM produtos WHERE id = ?")->execute([$id]);
@@ -269,15 +280,19 @@ function deletar_produto(PDO $pdo, $id) {
         });
     } catch (PDOException $e) {
         // tentamos rollback se possível
-        try { $pdo->rollBack(); } catch (Exception $_) {}
+        try {
+            $pdo->rollBack();
+        } catch (Exception $_) {
+        }
         return ['sucesso' => false, 'erro' => 'Erro ao deletar produto'];
     }
 }
 
 // Funções de movimentações
-function listar_movimentacoes(PDO $pdo, $limit = 100) {
+function listar_movimentacoes(PDO $pdo, $limit = 100)
+{
     try {
-        return db_call_retry($pdo, function($pdo) use ($limit) {
+        return db_call_retry($pdo, function ($pdo) use ($limit) {
             $sql = "SELECT m.*, p.nome as produto_nome, p.sku
                 FROM movimentacoes m
                 JOIN produtos p ON m.produto_id = p.id
@@ -291,9 +306,10 @@ function listar_movimentacoes(PDO $pdo, $limit = 100) {
     }
 }
 
-function registrar_movimentacao(PDO $pdo, $produto_id, $tipo, $quantidade, $descricao = '') {
+function registrar_movimentacao(PDO $pdo, $produto_id, $tipo, $quantidade, $descricao = '')
+{
     try {
-        return db_call_retry($pdo, function($pdo) use ($produto_id, $tipo, $quantidade, $descricao) {
+        return db_call_retry($pdo, function ($pdo) use ($produto_id, $tipo, $quantidade, $descricao) {
             $pdo->beginTransaction();
 
             // Inserir movimentação
@@ -308,15 +324,19 @@ function registrar_movimentacao(PDO $pdo, $produto_id, $tipo, $quantidade, $desc
             return ['sucesso' => true, 'mensagem' => 'Movimentação registrada'];
         });
     } catch (PDOException $e) {
-        try { $pdo->rollBack(); } catch (Exception $_) {}
+        try {
+            $pdo->rollBack();
+        } catch (Exception $_) {
+        }
         return ['sucesso' => false, 'erro' => 'Erro ao registrar movimentação'];
     }
 }
 
 // Funções de dashboard
-function obter_estatisticas(PDO $pdo) {
+function obter_estatisticas(PDO $pdo)
+{
     try {
-        return db_call_retry($pdo, function($pdo) {
+        return db_call_retry($pdo, function ($pdo) {
             $total_produtos = $pdo->query("SELECT COUNT(*) as count FROM produtos")->fetch(PDO::FETCH_ASSOC)['count'];
             $valor_total = $pdo->query("SELECT SUM(quantidade * preco) as total FROM produtos")->fetch(PDO::FETCH_ASSOC)['total'] ?? 0;
             $movimentacoes_hoje = $pdo->query("SELECT COUNT(*) as count FROM movimentacoes WHERE DATE(data) = DATE('now')")->fetch(PDO::FETCH_ASSOC)['count'];
@@ -335,6 +355,32 @@ function obter_estatisticas(PDO $pdo) {
             'valor_total' => number_format(0, 2, ',', '.'),
             'movimentacoes_hoje' => 0,
             'produtos_baixos' => 0
+        ];
+    }
+}
+
+function obter_estatisticasMovDia(PDO $pdo)
+{
+    try {
+        return db_call_retry($pdo, function ($pdo) {
+            $start = date('Y-m-d 00:00:00');
+            $end   = date('Y-m-d 23:59:59');
+
+            $sql = "SELECT COUNT(*) as count 
+            FROM movimentacoes 
+            WHERE data >= :start AND data <= :end";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute([':start' => $start, ':end' => $end]);
+
+            $movimentacoes_hoje = $stmt->fetch(PDO::FETCH_ASSOC)['count'];
+            return [
+                'movimentacoes_hoje' => $movimentacoes_hoje,
+            ];
+        });
+    } catch (PDOException $e) {
+        return [
+            'movimentacoes_hoje' => 0,
         ];
     }
 }

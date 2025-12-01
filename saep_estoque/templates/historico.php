@@ -18,7 +18,7 @@ $filtro_data = $_GET['filtro_data'] ?? '';
 
 // Filtra o array de movimentações via PHP
 if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
-    $movimentacoes = array_filter($movimentacoes, function($m) use ($filtro_tipo, $busca, $filtro_data) {
+    $movimentacoes = array_filter($movimentacoes, function ($m) use ($filtro_tipo, $busca, $filtro_data) {
         // 1. Filtro de Tipo (Entrada/Saída)
         if ($filtro_tipo !== 'todos' && $m['tipo'] !== $filtro_tipo) {
             return false;
@@ -44,6 +44,7 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -56,12 +57,13 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="container">
-            
+
             <div class="flex-between">
-                <h1><img src="../saep_estoque/static/images/logo.png" alt="Logo SAEP"  style="height: 85px; width:85px; margin-right: 1px; background-color: white; border-radius: 8px;"> 📦Controle de Estoque</h1>
+                <h1><img src="../saep_estoque/static/images/logo.png" alt="Logo SAEP" style="height: 85px; width:85px; margin-right: 1px; background-color: white; border-radius: 8px;"> 📦Controle de Estoque</h1>
                 <div class="header-user">
                     <span>Bem-vindo, <strong><?php echo htmlspecialchars($_SESSION['nome']); ?></strong></span>
                 </div>
@@ -71,9 +73,9 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
                 <a href="../saep_estoque/app.php?action=dashboard">Dashboard</a>
                 <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
                 <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
-                <a href="../saep_estoque/app.php?action=historico">Histórico</a>
+                <a href="../saep_estoque/app.php?action=historico" class="active">Histórico</a>
                 <a href="../saep_estoque/app.php?action=perfil">Perfil</a>
-                <a href="../saep_estoque/app.php?action=ajuda" >Ajuda</a>            
+                <a href="../saep_estoque/app.php?action=ajuda">Ajuda</a>
             </nav>
         </div>
     </header>
@@ -87,15 +89,15 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
         ?>
 
         <?php if ($mensagem_sucesso): ?>
-        <div class="alert alert-success">
-            ✓ <?php echo htmlspecialchars($mensagem_sucesso); ?>
-        </div>
+            <div class="alert alert-success">
+                ✓ <?php echo htmlspecialchars($mensagem_sucesso); ?>
+            </div>
         <?php endif; ?>
 
         <?php if ($erro): ?>
-        <div class="alert alert-error">
-            ✗ <?php echo htmlspecialchars($erro); ?>
-        </div>
+            <div class="alert alert-error">
+                ✗ <?php echo htmlspecialchars($erro); ?>
+            </div>
         <?php endif; ?>
 
         <div class="card">
@@ -105,13 +107,13 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
             <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 6px; margin-bottom: 1.5rem;">
                 <form method="GET" action="app.php" style="display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; justify-content: space-between;">
                     <input type="hidden" name="action" value="historico">
-                    
+
                     <!-- Busca por Nome -->
                     <div style="flex: 1; min-width: 200px;">
-                        <input type="text" name="busca" 
-                               value="<?php echo htmlspecialchars($busca); ?>" 
-                               placeholder="🔍 Buscar nome do produto..." 
-                               style="width: 100%; padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px;">
+                        <input type="text" name="busca"
+                            value="<?php echo htmlspecialchars($busca); ?>"
+                            placeholder="🔍 Buscar nome do produto..."
+                            style="width: 100%; padding: 0.6rem; border: 1px solid #ddd; border-radius: 4px;">
                     </div>
 
                     <!-- Filtros em Linha -->
@@ -124,71 +126,71 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
                         </select>
 
                         <!-- Data -->
-                        <input type="date" name="filtro_data" 
-                               value="<?php echo htmlspecialchars($filtro_data); ?>"
-                               style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
-                        
+                        <input type="date" name="filtro_data"
+                            value="<?php echo htmlspecialchars($filtro_data); ?>"
+                            style="padding: 0.5rem; border: 1px solid #ddd; border-radius: 4px;">
+
                         <!-- Botão Filtrar -->
                         <button type="submit" class="btn btn-secondary btn-small" style="height: 38px;">Filtrar</button>
-                        
+
                         <!-- Botão Limpar (Opcional) -->
-                        <?php if($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)): ?>
+                        <?php if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)): ?>
                             <a href="app.php?action=historico" class="btn btn-small" style="background: #ccc; text-decoration: none; color: #333; display: flex; align-items: center; height: 38px;">Limpar</a>
                         <?php endif; ?>
                     </div>
                 </form>
             </div>
-            
+
             <div style="margin-bottom: 1rem; color: #666;">
                 <small>Exibindo <strong><?php echo count($movimentacoes); ?></strong> resultados encontrados.</small>
             </div>
             <!-- FIM ÁREA DE FILTROS -->
 
             <?php if (!empty($movimentacoes)): ?>
-            <div class="overflow-auto">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data/Hora</th>
-                            <th>Código</th>
-                            <th>Produto</th>
-                            <th>Tipo</th>
-                            <th>Quantidade</th>
-                            <th>Descrição</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($movimentacoes as $mov): ?>
-                        <tr>
-                            <td>
-                                <small><strong><?php echo date('d/m/Y H:i:s', strtotime($mov['data'])); ?></strong></small>
-                            </td>
-                            <td>
-                                <small><?php echo htmlspecialchars($mov['sku']); ?></small>
-                            </td>
-                            <td>
-                                <strong><?php echo htmlspecialchars($mov['produto_nome']); ?></strong>
-                            </td>
-                            <td>
-                                <span class="badge <?php echo $mov['tipo'] === 'entrada' ? 'badge-success' : 'badge-warning'; ?>">
-                                    <?php echo $mov['tipo'] === 'entrada' ? '📥 Entrada' : '📤 Saída'; ?>
-                                </span>
-                            </td>
-                            <td>
-                                <strong><?php echo $mov['quantidade']; ?> unidades</strong>
-                            </td>
-                            <td>
-                                <?php echo htmlspecialchars($mov['descricao'] ?? '-'); ?>
-                            </td>
-                        </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                <div class="overflow-auto">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Data/Hora</th>
+                                <th>Código</th>
+                                <th>Produto</th>
+                                <th>Tipo</th>
+                                <th>Quantidade</th>
+                                <th>Descrição</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php foreach ($movimentacoes as $mov): ?>
+                                <tr>
+                                    <td>
+                                        <small><strong><?php echo date('d/m/Y H:i:s', strtotime($mov['data'])); ?></strong></small>
+                                    </td>
+                                    <td>
+                                        <small><?php echo htmlspecialchars($mov['sku']); ?></small>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo htmlspecialchars($mov['produto_nome']); ?></strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge <?php echo $mov['tipo'] === 'entrada' ? 'badge-success' : 'badge-warning'; ?>">
+                                            <?php echo $mov['tipo'] === 'entrada' ? '📥 Entrada' : '📤 Saída'; ?>
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <strong><?php echo $mov['quantidade']; ?> unidades</strong>
+                                    </td>
+                                    <td>
+                                        <?php echo htmlspecialchars($mov['descricao'] ?? '-'); ?>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             <?php else: ?>
-            <div style="padding: 2rem; text-align: center; color: #888;">
-                <p>Nenhuma movimentação encontrada para os filtros selecionados.</p>
-            </div>
+                <div style="padding: 2rem; text-align: center; color: #888;">
+                    <p>Nenhuma movimentação encontrada para os filtros selecionados.</p>
+                </div>
             <?php endif; ?>
         </div>
 
@@ -200,4 +202,5 @@ if ($filtro_tipo !== 'todos' || !empty($busca) || !empty($filtro_data)) {
 
     <script src="/saep_estoque/static/js/script.js"></script>
 </body>
+
 </html>

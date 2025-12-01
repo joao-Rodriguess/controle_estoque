@@ -37,7 +37,7 @@ if (!$usuario_logado) {
                 <a href="../saep_estoque/app.php?action=produtos">Produtos</a>
                 <a href="../saep_estoque/app.php?action=movimentacoes">Movimentações</a>
                 <a href="../saep_estoque/app.php?action=historico">Histórico</a>
-                <a href="../saep_estoque/app.php?action=perfil">Perfil</a>
+                <a href="../saep_estoque/app.php?action=perfil" class="active">Perfil</a>
                 <a href="../saep_estoque/app.php?action=ajuda" >Ajuda</a>            
             </nav>
         </div>

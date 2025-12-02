@@ -312,6 +312,26 @@ function registrar_movimentacao(PDO $pdo, $produto_id, $tipo, $quantidade, $desc
         return db_call_retry($pdo, function ($pdo) use ($produto_id, $tipo, $quantidade, $descricao) {
             $pdo->beginTransaction();
 
+            // Verificar estoque disponível antes de processar saída
+            if ($tipo === 'saida') {
+                $stmt = $pdo->prepare("SELECT quantidade, nome FROM produtos WHERE id = ?");
+                $stmt->execute([$produto_id]);
+                $produto = $stmt->fetch(PDO::FETCH_ASSOC);
+
+                if (!$produto) {
+                    $pdo->rollBack();
+                    return ['sucesso' => false, 'erro' => 'Produto não encontrado'];
+                }
+
+                if ($produto['quantidade'] < $quantidade) {
+                    $pdo->rollBack();
+                    return [
+                        'sucesso' => false,
+                        'erro' => "Estoque insuficiente! Disponível: {$produto['quantidade']} unidades. Solicitado: {$quantidade} unidades."
+                    ];
+                }
+            }
+
             // Inserir movimentação
             $stmt = $pdo->prepare("INSERT INTO movimentacoes (produto_id, tipo, quantidade, descricao) VALUES (?, ?, ?, ?)");
             $stmt->execute([$produto_id, $tipo, $quantidade, $descricao]);
@@ -364,7 +384,7 @@ function obter_estatisticasMovDia(PDO $pdo)
     try {
         return db_call_retry($pdo, function ($pdo) {
             $start = date('Y-m-d 00:00:00');
-            $end   = date('Y-m-d 23:59:59');
+            $end = date('Y-m-d 23:59:59');
 
             $sql = "SELECT COUNT(*) as count 
             FROM movimentacoes 
